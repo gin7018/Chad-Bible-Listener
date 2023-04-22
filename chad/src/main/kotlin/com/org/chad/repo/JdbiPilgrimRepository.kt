@@ -11,10 +11,14 @@ class JdbiPilgrimRepository (
 
     override fun register(name: String, username: String, password: String): Pilgrim? {
         val id = UUID.randomUUID()
-        return dao.register(id, name, username, password)
+        dao.register(id, name, username, password)
+        return pilgrim(id)
     }
 
     override fun login(username: String, password: String): Pilgrim? {
         return dao.login(username, password)
     }
+
+    private fun pilgrim(pilgrimId: UUID): Pilgrim? =
+        dao.getPilgrim(pilgrimId)
 }

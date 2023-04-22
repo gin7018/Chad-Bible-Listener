@@ -21,7 +21,9 @@ class JdbiModule {
         val hostname = System.getenv("RDS_HOSTNAME")
         val port = System.getenv("RDS_PORT")
         val jdbiUrl = "jdbc:postgresql://$hostname:$port/$dbName?user=$userName&password=$password"
-        val con = Jdbi.create(jdbiUrl)
+        val con = Jdbi
+            .create(jdbiUrl)
+            .installPlugins()
         LOG.info("Remote connection successful.")
         return con
     }

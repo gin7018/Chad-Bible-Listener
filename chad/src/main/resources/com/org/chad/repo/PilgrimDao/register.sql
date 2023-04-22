@@ -5,5 +5,4 @@ VALUES (
         :name,
         :username,
         :password
-       )
-RETURNING *;
+       );
