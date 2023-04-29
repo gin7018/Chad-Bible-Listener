@@ -7,7 +7,7 @@ INSERT INTO chad.playlists(
                            )
 VALUES (
         nextval('chad.playlists_playlist_id_seq'),
-        :id,
+        :playlistId,
         (SELECT pilgrim_uuid FROM chad.pilgrims WHERE username = :username),
         '{"chapters": []}'::JSONB,
         :playlistName

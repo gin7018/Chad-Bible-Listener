@@ -36,23 +36,23 @@ class PlaylistResource(
     }
 
     @PostMapping("/delete/")
-    fun deletePlaylist(@RequestParam id: UUID): ResponseEntity<Boolean> {
-        LOG.info("POST playlist/delete/ $id")
-        playlistRepository.deletePlaylist(id)
+    fun deletePlaylist(@RequestParam username: String, @RequestParam playlistId: UUID): ResponseEntity<Boolean> {
+        LOG.info("POST playlist/delete/ $playlistId for $username")
+        playlistRepository.deletePlaylist(username, playlistId)
         return ResponseEntity(true, HttpStatus.ACCEPTED)
     }
 
     @PutMapping("/chapter/add/")
-    fun addChapter(@RequestParam playlistId: UUID, @RequestParam chapterId: Int): ResponseEntity<Playlist> {
+    fun addChapter(@RequestParam username: String, @RequestParam playlistId: UUID, @RequestParam chapterId: Int): ResponseEntity<Playlist> {
         LOG.info("PUT playlist/chapter/add/ $chapterId")
-        val ch = playlistRepository.addChapter(playlistId, chapterId)
+        val ch = playlistRepository.addChapter(username, playlistId, chapterId)
         return ResponseEntity(ch, HttpStatus.ACCEPTED)
     }
 
     @PutMapping("/chapter/remove/")
-    fun removeChapter(@RequestParam playlistId: UUID, @RequestParam chapterId: Int): ResponseEntity<Playlist> {
+    fun removeChapter(@RequestParam username: String, @RequestParam playlistId: UUID, @RequestParam chapterId: Int): ResponseEntity<Playlist> {
         LOG.info("PUT playlist/chapter/remove/ $chapterId")
-        val ch = playlistRepository.removeChapter(playlistId, chapterId)
+        val ch = playlistRepository.removeChapter(username, playlistId, chapterId)
         return ResponseEntity(ch, HttpStatus.ACCEPTED)
     }
 
